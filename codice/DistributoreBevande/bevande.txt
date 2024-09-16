@@ -1,0 +1,6 @@
+Nome bevanda: The, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Camomilla, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Acqua, quantità: 5.0, prezzo: 0.5
+Nome bevanda: Caffe, quantità: 5.0, prezzo: 1.0
+Nome bevanda: Cioccolata calda, quantità: 5.0, prezzo: 3.0
+Nome bevanda: Latte, quantità: 5.0, prezzo: 1.5

@@ -1,0 +1,549 @@
+\documentclass{article}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage[english,italian]{babel}
+\usepackage{hyperref} % Rende l'indice cliccabile
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  commentstyle=\color{green!40!black},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  captionpos=b,
+}
+
+
+
+\hypersetup{ % Setup dell'aspetto dei link
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\pagenumbering{gobble} %disabilita il numeraggio delle pagine
+\begin{center}
+    \includegraphics[width=5cm]{logo_parthenope.png}
+\end{center}
+
+\begin{center}
+    \LARGE{\textbf{UNIVERSITÀ DEGLI STUDI DI NAPOLI PARTHENOPE}}
+    \vspace{3mm}
+    \\ \normalsize{DIPARTIMENTO DI SCIENZE E TECNOLOGIE}
+    \\ \normalsize{CORSO DI PROGRAMMAZIONE 3 E LABORATORIO DI PROGRAMMAZIONE 3}
+\end{center}
+
+\vspace{8mm}
+
+\begin{center}
+\LARGE{\textbf{DISTRIBUTORE BEVANDE}}
+\end{center}
+
+\begin{center}
+    \\ \normalsize{CATEGORIA: GESTIONALE}
+    \vspace{5mm}
+    \\ \normalsize{CODICE GRUPPO: v3bgp3z697e}
+\end{center}
+
+\vspace{20mm}
+
+\begin{flushleft}
+      \LARGE{\textbf{DOCENTE\hspace{7cm}CANDIDATI}} 
+\end{flushleft}
+  \vspace{5mm}
+  
+  
+
+
+\vspace{5mm}
+
+
+\begin{flushleft}
+    {\fontsize{15}{14}\selectfont Angelo Ciaramella\hspace{5cm}Viscillo Nicola 0124002557}
+\end{flushleft}
+\begin{flushleft}
+    {\fontsize{15}{14}\selectfont \hspace{9cm}Galiero Nicola  0124002671}
+\end{flushleft}
+
+
+\vspace{15mm}
+
+\begin{center}
+      \LARGE{\textbf{Anno accademico 2023 - 2024}}  
+\end{center}
+
+
+\vspace{4mm}
+ 
+\newpage
+
+\pagenumbering{arabic}
+\tableofcontents
+
+\newpage
+
+
+\vspace{1cm}
+
+\section*{Introduzione}
+\subsection*{Traccia del progetto}
+\noindent 
+\item Si vuole simulare un distributore automatico di Bevande. Il distributore ha 6 tipologie di bevande: caffè, thè, latte, camomilla, cioccolata e acqua calda. Per ogni tipologia sono previste delle sottotipologie (e.g., caffè e latte, latte e caffè, caffè e cioccolato, thè e latte, . . .). L’utente può scegliere anche la quantità di zucchero da erogare.
+Scrivere un programma per la gestione del distributore. L’accesso deve avvenire sia in modalità amministratore che in modalità utente.
+\item
+L’amministratore può effettuare le seguenti operazioni:
+    \begin{itemize}
+        \item periodicamente aggiungere bevande alla scorta. Il sistema controlla automaticamente se la bevanda è sotto scorta (minore di 1 litro)    
+        \item definire il prezzo per ogni tipo di bevanda
+        \item fare un report sui consumi mensili delle diverse tipologie di bevande
+        \item aggiungere una nuova tipologia di bevanda partendo da quelle già esistenti (e.g., thè con limone)
+  \end{itemize}
+L’utente può effettuare le seguenti operazioni:
+\begin{itemize}
+    \item scegliere, prelevare e pagare una bevanda. Il pagamento può avvenire secondo le modalità: contanti (5, 10, 20, 50 centesimi, 1 e 2 euro), chiavetta ricaricabile o carta di credito
+    \item ricaricare una chiavetta inserendo contanti (5,10,20,50 euro)
+\end{itemize}
+\vspace{3mm}
+\subsection*{Proposta di realizzazione}
+\item Abbiamo scelto la modalità di sviluppo \textbf{programma standalone con supporto grafico} , usando l'IDE IntelliJ e il suo strumento grafico \textbf{GUI Designer}. 
+\item All'interno del progetto, facciamo uso dei file come componente per immagazzinare i dati relativi alle bevande, alle sottotipologie delle bevande e ai consumi mensili.
+
+\newpage
+\section{Teoria}
+
+\subsection{Breve descrizione dei requisiti del progetto}
+\item Il progetto consiste in un simulatore di distributore automatico di bevande con accesso in modalità amministratore e utente.
+\vspace{2mm}
+\item Modalità amministratore:
+\begin{itemize}
+    \item Rifornimento periodico di bevande;
+    \item Definizione dei prezzi;
+    \item Report mensili sui consumi;
+    \item Aggiunta di nuove tipologie di bevande.
+\end{itemize}
+\vspace{2mm}
+\item Modalità utente: 
+\begin{itemize}
+    \item Selezione della bevanda e quantità di zucchero;
+    \item Pagamento in contanti, chiavetta ricaricabile o carta di credito;
+    \item Ricarica della chiavetta con contanti.
+\end{itemize}
+\subsection{Pattern}
+\item I pattern vengono definiti come soluzioni architetturali che possono risolvere problemi in contesti etegorenei. Ci sono tre tipi di Pattern fondamentali:
+\begin{itemize}
+    \item Creational Patterns;
+    \item Structural Patterns; 
+    \item Behavioral Patterns.  
+\end{itemize}
+\item I pattern da noi scelti sono: 
+\begin{itemize}
+    \item Singleton Pattern: per garantire che esista una sola istanza della classe Distributore in modo che tutte le richieste di accesso al distributore siano gestite da un'unica istanza. Questo è utile per garantire coerenza e centralizzazione nella gestione delle operazioni di distribuzione e ricarica;
+    \item Strategy Pattern: per gestire diversi algoritmi di pagamento. Abbiamo diverse strategie di pagamento per contanti, chiavetta ricaricabile e carta di credito. Abbiamo creato un'interfaccia PaymentStrategy con implementazioni concrete per ciascun metodo di pagamento, permettendo all'utente di selezionare la strategia desiderata;
+    \item State Pattern: abbiamo utilizzato lo State Pattern per gestire le diverse modalità del distributore. Ogni classe che implementa l'interfaccia "ModalitaDistributore" è responsabile delle sue azioni specifiche;
+    \item Command Pattern: utilizzato per incapsulare richieste specifiche di amministrazione (come l'aggiunta di una bevanda alla scorta) in oggetti comando, facilitando l'aggiunta di nuove funzionalità e la gestione delle azioni richieste dall'utente.
+    
+\end{itemize}
+
+\subsection{Diagramma UML delle classi}
+\begin{center}
+    \includegraphics[width=15cm]{diagramma classi finito.png}
+\end{center}
+\begin{center}
+    Diagramma delle classi
+\end{center}
+\vspace{3cm}
+\begin{center}
+    \includegraphics[width=10cm]{uml.png}
+\end{center}
+\begin{center}
+    Diagramma use case
+\end{center}
+
+\newpage
+\section{Pratica}
+\item In questa sezione verranno implementate parti rilevanti del codice sviluppato.
+\subsection{Pattern}
+
+\item Singleton Pattern
+\begin{lstlisting}
+public class Distributore {
+    private static Distributore instance;
+    
+    private Distributore() {
+    .
+    .
+    .
+    }
+    
+    public static Distributore getInstance() {
+        if(instance == null) {
+            instance = new Distributore();
+        }
+        return instance;
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public class DistributoreAutomatico extends JFrame implements MenuPrincipale {
+
+    private Distributore distributore = Distributore.getInstance();
+    .
+    .
+    .
+}
+\end{lstlisting}
+
+\item La classe Distributore rappresenta il distributore automatico di bevande.
+Gestisce la scorta di bevande, i prezzi, i consumi mensili e fornisce
+funzionalità per aggiungere bevande, effettuare pagamenti e generare report.
+
+\vspace{2cm}
+
+\item State Pattern
+\begin{lstlisting}
+public interface ModalitaDistributore {
+    void gestisciModalita();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public class ModalitaAmministratore extends JPanel implements ModalitaDistributore {
+
+        .
+        .
+        .
+        
+        @Override
+        public void gestisciModalita() {
+                JOptionPane.showMessageDialog(null, "Modalità amministratore selezionata", "Successo", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+}
+\end{lstlisting}
+
+\item Questa classe rappresenta la modalità amministratore del distributore automatico.
+Fornisce funzionalità come l'aggiunta di bevande alla scorta, la definizione dei prezzi
+delle bevande e la generazione di report sui consumi mensili.
+
+\begin{lstlisting}
+public class ModalitaUtente extends JPanel implements ModalitaDistributore{
+        private Utente utente;
+        .
+        .
+        .
+        @Override
+        public void gestisciModalita() {
+                JOptionPane.showMessageDialog(null, "Modalità utente selezionata", "Successo", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+}
+\end{lstlisting}
+
+\item Questa classe rappresenta la modalità Utente del distributore automatico.
+Gli utenti possono scegliere, prelevare e pagare una bevanda, ricaricare la chiavetta, o
+tornare al menu principale.
+
+\vspace{2cm}
+
+\item Strategy Pattern
+\begin{lstlisting}
+public interface MetodoPagamento {
+    boolean effettuaPagamento(double importo);
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public class CartaCredito implements MetodoPagamento {
+    @Override
+    public boolean effettuaPagamento(double importo) {
+        String numeroCarta = JOptionPane.showInputDialog("Inserisci il numero della carta:");
+        String dataScadenza = JOptionPane.showInputDialog("Inserisci la data di scadenza della carta:");
+        String codiceSicurezza = JOptionPane.showInputDialog("Inserisci il cvv della carta:");
+
+        if(verificaCarta(numeroCarta, dataScadenza, codiceSicurezza)) {
+            JOptionPane.showMessageDialog(null, "Pagamento effettuato con successo. Importo pagato: " + importo + " euro", "Successo", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Errore durante il pagamento. Riprova", "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    //Metodo privato utilizzato per verificare la validità della carta di credito.
+    //In questa implementazione, la verifica è simulata e restituisce sempre true.
+    private boolean verificaCarta(String numeroCarta, String dataScadenza, String codiceSicurezza) {
+        return true;
+    }
+}
+\end{lstlisting}
+
+\item La classe CartaCredito implementa l'interfaccia MetodoPagamento e consente di effettuare pagamenti
+utilizzando una carta di credito.
+Richiede all'utente di inserire il numero della carta, la data di scadenza e il codice di
+sicurezza per completare il pagamento.
+
+\newpage
+\begin{lstlisting}
+public class Chiavetta implements MetodoPagamento {
+    private double saldo;       //Saldo attuale sulla chiavetta
+
+    public Chiavetta(double saldoIniziale) {
+        this.saldo = saldoIniziale;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    //Metodo per effettuare il pagamento utilizzando la chiavetta.
+    //Richiede all'utente di inserire il codice della chiavetta e verifica se il saldo è sufficiente.
+    @Override
+    public boolean effettuaPagamento(double importo) {
+        //Verifica se il saldo è sufficiente per effettuare il pagamento
+        if(saldo >= importo) {
+            String codiceChiavetta = JOptionPane.showInputDialog("Inserisci il codice della chiavetta");
+            if(verificaCodiceChiavetta(codiceChiavetta)) {
+                saldo -= importo;
+                JOptionPane.showMessageDialog(null, "Pagamento effettuato con successo. Importo pagato: " + importo + " euro.\nSaldo rimanente: " + saldo + " euro", "Successo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Codice chiavetta non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Saldo insufficiente", "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    //Metodo privato per verificare la validità del codice della chiavetta.
+    //In questa implementazione, la verifica è simulata e restituisce sempre true.
+    private boolean verificaCodiceChiavetta(String codiceChiavetta) {
+        return true;
+    }
+
+    //Metodo per ricaricare la chiavetta con un importo specifico.
+    public void ricaricaChiavetta(double importoRicarica) {
+        if(importoRicarica == 5.0 || importoRicarica == 10.0 || importoRicarica == 20.0 || importoRicarica == 50.0) {
+            saldo += importoRicarica;
+            JOptionPane.showMessageDialog(null, "Ricarica effettuata con successo. Nuovo saldo: " + saldo + " euro", "Successo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Importo ricarica non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+\end{lstlisting}
+
+\newpage
+\item La classe Chiavetta implementa l'interfaccia MetodoPagamento e consente di effettuare pagamenti
+utilizzando una chiavetta prepagata con un saldo associato.
+È inoltre possibile ricaricare la chiavetta.
+
+\vspace{1cm}
+
+\begin{lstlisting}
+public class Contanti implements MetodoPagamento {
+    //Lista dei valori delle monete consentite
+    private List<Double> moneteConsentite = Arrays.asList(0.05, 0.10, 0.20, 0.50, 1.0, 2.0);
+
+    //Metodo per effettuare il pagamento utilizzando le monete.
+    //Richiede all'utente di inserire monete fino a raggiungere l'importo specificato.
+    //Restituisce il resto, se presente.
+    @Override
+    public boolean effettuaPagamento(double importo) {
+        double importoRimanente = importo;
+        double importoPagato = 0.0;
+
+        while(importoRimanente > 0) {
+            String input = JOptionPane.showInputDialog("Inserire moneta:");
+            double monetaInserita;
+
+            try {
+                monetaInserita = Double.parseDouble(input);
+            } catch(NumberFormatException exc) {
+                JOptionPane.showMessageDialog(null, "Inserire un valore numerico valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+
+            if(moneteConsentite.contains(monetaInserita)) {
+                importoPagato += monetaInserita;
+                importoRimanente -= monetaInserita;
+                if(importoRimanente > 0) {
+                    JOptionPane.showMessageDialog(null, "Importo rimanente: " + importoRimanente + " euro", "Importo Rimanente", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Moneta non consentita", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Pagamento effettuato con successo. Importo pagato: " + importo + " euro", "Successo", JOptionPane.INFORMATION_MESSAGE);
+
+        //Restituzione resto
+        double resto = importoPagato - importo;
+        if(resto > 0) {
+            JOptionPane.showMessageDialog(null, "Resto: " + resto + " euro", "Resto", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return true;
+    }
+}
+\end{lstlisting}
+
+\item La classe Contanti implementa l'interfaccia MetodoPagamento e consente di effettuare pagamenti
+utilizzando monete di diverso valore.
+
+\newpage
+
+\item Command Pattern
+\begin{lstlisting}
+public interface Comando {
+    void esegui();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public class ComandoAggiungiBevanda implements Comando {
+    //Riferimento al distributore su cui eseguire il comando
+    private Distributore distributore;
+
+    public ComandoAggiungiBevanda(Distributore distributore) {
+        this.distributore = distributore;
+    }
+
+    //Metodo per eseguire il comando di aggiunta bevande sul distributore.
+    @Override
+    public void esegui() {
+        distributore.aggiungiBevande();
+    }
+}
+\end{lstlisting}
+
+\item La classe ComandoAggiungiBevanda implementa l'interfaccia Comando e rappresenta un comando
+per aggiungere bevande al distributore.
+
+\vspace{1cm}
+
+\begin{lstlisting}
+public class Distributore {
+    private Comando comandoCorrente;
+
+    public void impostaComando(Comando comando) {
+        this.comandoCorrente = comando;
+    }
+
+    public void eseguiComando() {
+        if(comandoCorrente != null) {
+            comandoCorrente.esegui();
+        } else {
+            System.out.println("Nessun comando impostato");
+        }
+    }
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}
+public class ModalitaAmministratore extends JPanel implements ModalitaDistributore {
+    public ModalitaAmministratore(DistributoreAutomatico distributoreAutomatico, Distributore distributore) {
+        .
+        .
+        JButton aggiungiBevandaButton = new JButton("Aggiungi bevanda alla scorta");
+
+        aggiungiBevandaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crea un nuovo comando per aggiungere una bevanda al distributore
+                Comando comandoAggiungiBevanda = new ComandoAggiungiBevanda(distributore);
+
+                //Imposta il comando corrente nel distributore
+                distributore.impostaComando(comandoAggiungiBevanda);
+
+                //Esegue il comando corrente
+                distributore.eseguiComando();
+            }
+        });
+    }
+}
+\end{lstlisting}
+
+\newpage
+\subsection{Rappresentazione grafiche}
+\item In questa sezione ci sono alcuni esempi delle nostre interfacce grafiche sviluppate con IntelliJ IDEA: 
+\vspace{1cm}
+
+\begin{center}
+\includegraphics[width=6cm]{interfaccia_menu.png}
+\item Menu
+\end{center}
+\vspace{1cm}
+
+\begin{center}
+\includegraphics[width=6cm]{interfaccia_admin.png} 
+\item Amministratore
+\end{center}
+\vspace{1cm}
+\vspace{1cm}
+
+\begin{center}
+\includegraphics[width=6cm]{interfaccia_user.png}
+\item Utente
+\end{center}
+
+\newpage
+\subsection{File.txt}
+\item Qui ci sono le bevande prefissate: caffè, thè, latte, camomilla, cioccolata calda e acqua.
+\begin{center}
+    \includegraphics[width=15cm]{Screenshot 2024-01-15 105948.png}
+\end{center}
+\vspace{1cm}
+\item Questo è un esempio del file che contiene il report sui consumi delle bevande.
+\begin{center}
+    \includegraphics[width=15cm]{consumi mensili.png}
+\end{center}
+\newpage
+\item Qui ci sono le sottotipologie che derivano dalle tipologie principali. Alcuni esempi:caffè e latte, latte e caffè, caffè e cioccolato, thè e latte. 
+\begin{center}
+    \includegraphics[width=15cm]{sottotipologie.png}
+\end{center}
+
+
+\newpage
+
+\section{Conclusioni}
+
+\item 
+
+Il programma di gestione del distributore automatico di bevande presentato in questo progetto rappresenta una soluzione completa per le esigenze di amministratori e utenti.
+
+\item
+
+L'amministratore ha a disposizione diverse funzionalità per gestire efficientemente il distributore, tra cui la possibilità di:
+
+\begin{itemize}
+    \item Mantenere la scorta delle bevande;
+    \item Stabilire i prezzi;
+    \item Monitorare i consumi mensili;
+    \item Aggiungere nuove tipologie di bevande;
+\end{itemize}
+
+\item Queste funzionalità consentono di personalizzare il distributore in base alle esigenze specifiche dell'attività e di garantire un'esperienza utente fluida e conveniente.
+
+\item Gli utenti, invece, possono comodamente selezionare, prelevare e pagare le bevande secondo le loro preferenze. Il sistema offre diverse opzioni di pagamento, tra cui contanti, chiavette ricaricabili e carte di credito.
+
+\item In sintesi, il programma presentato in questo progetto offre un'interfaccia intuitiva e funzionalità avanzate che rendono il distributore automatico di bevande un servizio efficiente e adattabile alle esigenze degli utenti.
+
+\item La modularità del codice permette future espansioni e miglioramenti, assicurando la durabilità e la flessibilità del sistema nel tempo.
+
+\end{document}

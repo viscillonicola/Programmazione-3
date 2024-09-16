@@ -1,0 +1,3 @@
+Bevanda: Latte, acqua, Quantità consumata: 3 unità
+Bevanda: Cioccolata calda, Quantità consumata: 4 unità
+Bevanda: The, camomilla, Quantità consumata: 1 unità

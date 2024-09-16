@@ -1,0 +1,36 @@
+Nome bevanda: Latte, acqua, quantità: 5.0, prezzo: 2.0
+Nome bevanda: Latte, cioccolata calda, quantità: 5.0, prezzo: 4.5
+Nome bevanda: Cioccolata calda, the, quantità: 5.0, prezzo: 5.5
+Nome bevanda: The, cioccolata calda, quantità: 5.0, prezzo: 5.5
+Nome bevanda: Caffe, latte, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Cioccolata calda, acqua, quantità: 5.0, prezzo: 3.5
+Nome bevanda: Acqua, cioccolata calda, quantità: 5.0, prezzo: 3.5
+Nome bevanda: Camomilla, the, quantità: 5.0, prezzo: 5.0
+Nome bevanda: The, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Caffe, cioccolata calda, quantità: 5.0, prezzo: 4.0
+Nome bevanda: Acqua, camomilla, quantità: 5.0, prezzo: 3.0
+Nome bevanda: Caffe, acqua, quantità: 5.0, prezzo: 1.5
+Nome bevanda: Caffe, the, quantità: 5.0, prezzo: 3.5
+Nome bevanda: The, acqua, quantità: 5.0, prezzo: 3.0
+Nome bevanda: Cioccolata calda, quantità: 5.0, prezzo: 3.0
+Nome bevanda: Acqua, latte, quantità: 5.0, prezzo: 2.0
+Nome bevanda: Acqua, the, quantità: 5.0, prezzo: 3.0
+Nome bevanda: The, camomilla, quantità: 5.0, prezzo: 5.0
+Nome bevanda: Latte, the, quantità: 5.0, prezzo: 4.0
+Nome bevanda: The, latte, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Acqua, caffe, quantità: 5.0, prezzo: 1.5
+Nome bevanda: The, caffe, quantità: 5.0, prezzo: 3.5
+Nome bevanda: Caffe, camomilla, quantità: 5.0, prezzo: 3.5
+Nome bevanda: Latte, quantità: 5.0, prezzo: 1.5
+Nome bevanda: Camomilla, latte, quantità: 5.0, prezzo: 4.0
+Nome bevanda: Latte, camomilla, quantità: 5.0, prezzo: 4.0
+Nome bevanda: Latte, caffe, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Camomilla, caffe, quantità: 5.0, prezzo: 3.5
+Nome bevanda: Camomilla, quantità: 5.0, prezzo: 2.5
+Nome bevanda: Cioccolata calda, caffe, quantità: 5.0, prezzo: 4.0
+Nome bevanda: Acqua, quantità: 5.0, prezzo: 0.5
+Nome bevanda: Camomilla, cioccolata calda, quantità: 5.0, prezzo: 5.5
+Nome bevanda: Caffe, quantità: 5.0, prezzo: 1.0
+Nome bevanda: Cioccolata calda, camomilla, quantità: 5.0, prezzo: 5.5
+Nome bevanda: Camomilla, acqua, quantità: 5.0, prezzo: 3.0
+Nome bevanda: Cioccolata calda, latte, quantità: 5.0, prezzo: 4.5
